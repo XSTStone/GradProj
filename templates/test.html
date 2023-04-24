@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问答系统</title>
+</head>
+<body>
+
+    <div style="width:350px;height:80px;margin: auto;font-size: 40px;margin: auto; ">
+    </div>-
+    <div style="width: 600px;height: 600px;margin: auto">
+        <form action="/test" method="get" >
+            <div>
+                <label for="factor1">factor1：</label>
+                <input type="text" name="factor1" id="factor1" style="width: 400px"/>
+                <br>
+                <label for="factor2">factor2：</label>
+                <input type="text" name="factor2" id="factor2" style="width: 400px"/>
+                <br>
+                <label for="factor3">factor3：</label>
+                <input type="text" name="factor3" id="factor3" style="width: 400px"/>
+                <br>
+                <label for="factor4">factor4：</label>
+                <input type="text" name="factor4" id="factor4" style="width: 400px"/>
+                <br>
+                <input type="submit" value="提交" style="background-color: red"/>
+            </div>
+            <div><label for="password">密码：</label></div>
+            <div>
+                <textarea name="password" id="password" cols="90" rows="20" disabled="disabled" style="border:1px solid">{{content}}</textarea>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

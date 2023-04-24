@@ -1,0 +1,6 @@
+Version 1.1
+	* Documentation updated
+	* Fixed contact form.php
+
+Version 1.0
+	Release
