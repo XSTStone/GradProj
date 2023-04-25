@@ -8,4 +8,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(50))
     password = Column(String(50))
-    role = Column(Integer)
+    role = Column(Integer) # 0 for admin, 1 for user
+
+def create_user(username, password, role=1):
+    user = User(username, password, )
+
