@@ -3,7 +3,7 @@ from flask import render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 import traceback
-from db.config import conn, DB_URI
+from static.config import conn, DB_URI
 from static import infos
 
 app = Flask(__name__)
@@ -113,13 +113,13 @@ def account_register_check():
 def account_register_err_handler(err_type):
     print('err_type = ', err_type)
     if err_type == 'username':
-        return render_template('account_register.html', err_info=infos.reg_err_infos[1])
+        return render_template('account_register.html', err_info=infos.reg_err_infos[1], err_type=err_type)
     elif err_type == 'password_confirm':
-        return render_template('account_register.html', err_info=infos.reg_err_infos[2])
+        return render_template('account_register.html', err_info=infos.reg_err_infos[2], err_type=err_type)
     elif err_type == 'missing_para':
-        return render_template('account_register.html', err_info=infos.reg_err_infos[3])
+        return render_template('account_register.html', err_info=infos.reg_err_infos[3], err_type=err_type)
     else:
-        return render_template('account_register.html', err_info=infos.reg_err_infos[4])
+        return render_template('account_register.html', err_info=infos.reg_err_infos[4], err_type='unknown')
 
 
 @app.route('/login/check', methods=['POST'])
