@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 import traceback
 from db.config import conn, DB_URI
+from static import infos
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -12,9 +13,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-@app.route('/')
-def home():
+@app.route('/home1')
+def home1():
     return render_template('index.html')
+
+
+@app.route('/home2')
+def home2():
+    return render_template('home2.html')
 
 
 @app.route('/home')
@@ -70,31 +76,50 @@ def quality_factor(factor):
     return render_template('%s.html' % factor)
 
 
-@app.route('/account/login', methods=['POST', 'GET'])
+@app.route('/account-login', methods=['POST', 'GET'])
 def account_login():
     return render_template('account_login.html')
 
 
-@app.route('/account/register', methods=['POST', 'GET'])
-def account_register():
-    if request.method == 'GET':
-        print('request.method = ', request.method)
-        return render_template('account_register.html')
-    elif request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        password2 = request.form.get('password2')
+@app.route('/account-register-page', methods=['GET'])
+def account_register_page():
+    print('Got in')
+    return render_template('account_register.html', err_info=infos.reg_err_infos[0])
 
-        if not all([username, password, password2]):
-            flash('Parameters lack')
-        elif password != password2:
-            flash("Confirming password doesn't match original password")
+
+@app.route('/account-register-check', methods=['POST'])
+def account_register_check():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    password2 = request.form.get('password2')
+
+    if not all([username, password, password2]):
+        return redirect(url_for('account_register_err_handler', err_type='missing_para'))
+    elif password != password2:
+        return redirect(url_for('account_register_err_handler', err_type='password_confirm'))
+    else:
+        new_user = Users(username=username, password=password, id=None)
+        users = Users.query.filter(Users.username == username).first()
+        if users is not None:
+            print(users.username)
+            return redirect(url_for('account_register_err_handler', err_type='username'))
         else:
-            new_user = Users(username=username, password=password, id=None)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('account_login'))
-    return redirect(url_for('account_register'))
+
+
+@app.route('/account-register-err/?<string:err_type>')
+def account_register_err_handler(err_type):
+    print('err_type = ', err_type)
+    if err_type == 'username':
+        return render_template('account_register.html', err_info=infos.reg_err_infos[1])
+    elif err_type == 'password_confirm':
+        return render_template('account_register.html', err_info=infos.reg_err_infos[2])
+    elif err_type == 'missing_para':
+        return render_template('account_register.html', err_info=infos.reg_err_infos[3])
+    else:
+        return render_template('account_register.html', err_info=infos.reg_err_infos[4])
 
 
 @app.route('/login/check', methods=['POST'])
@@ -103,8 +128,6 @@ def login_check():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        print('username = ', username)
-        print('password = ', password)
 
         user = Users.query.filter(Users.username == username, Users.password == password).first()
         if user:
