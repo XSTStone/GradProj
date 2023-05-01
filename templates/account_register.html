@@ -202,24 +202,88 @@
 							<div class="post_content entry-content">
 								<div class="woocommerce">
 									<h2>Register</h2>
-                                    {{ err_info }}
 									<form method="post" class="login" action="/account-register-check">
-                                        {% if err_type == '' %}
-										<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                        {% if err_type == 'username' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 											<label for="username">Username <span class="required">*</span></label>
 											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder={{err_info}} />
-										</p>
-										<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-											<label for="password">Password <span class="required">*</span></label>
-											<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" placeholder={{err_info}}/>
-										</p>
-                                        <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-											<label for="password">Password Confirm<span class="required">*</span></label>
-											<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" placeholder={{err_info}}/>
-										</p>
-                                        <p class="form-row">
-											<input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
-										</p>
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password Confirm<span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
+                                            </p>
+                                        {%  elif err_type == 'password_confirm' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+											<label for="username">Username <span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" />
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password"  placeholder={{err_info}} />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password Confirm<span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" placeholder={{err_info}} />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
+                                            </p>
+                                        {% elif err_type == 'missing_para' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+											<label for="username">Username <span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder={{err_info}} />
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password"  placeholder={{err_info}} />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password Confirm<span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" placeholder={{err_info}} />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
+                                            </p>
+                                        {% elif err_type == 'unknown' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+											<label for="username">Username <span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder={{err_info}} />
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password"  placeholder={{err_info}} />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password Confirm<span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" placeholder={{err_info}} />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
+                                            </p>
+                                        {% else %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+											<label for="username">Username <span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder={{err_info}} />
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password"  placeholder={{err_info}} />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password Confirm<span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password2" id="password2" placeholder={{err_info}} />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Register" />
+                                            </p>
+                                        {% endif %}
 									</form>
 								</div>
 							</div>

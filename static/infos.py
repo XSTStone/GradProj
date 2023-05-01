@@ -1,5 +1,10 @@
-reg_err_infos = [' ',
-                 'Username has been used. Please choose another one.',
-                 "Two passwords don't match. Please check again.",
-                 'Username, password and confirming password should be all filled',
-                 'Unknown error type']
+reg_err_infos = ['Username_Duplicate',
+                 "Different_Password",
+                 'Parameters_Missed',
+                 'Unknown_Error',
+                 '']
+
+reg_err_types = ['username',
+                 'password_confirm',
+                 'missing_para',
+                 'unknown']

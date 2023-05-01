@@ -23,6 +23,11 @@ def home2():
     return render_template('home2.html')
 
 
+@app.route('/')
+def default_page():
+    return render_template('home2.html')
+
+
 @app.route('/home')
 def home_logged():
     return render_template('index.html')
@@ -59,8 +64,8 @@ def wine_feature():
 
 
 # 偏门知识
-@app.route('/wine-self/fun')
-def wine_fun():
+@app.route('/wine-self/trivia')
+def wine_trivia():
     return render_template('')
 
 
@@ -76,15 +81,10 @@ def quality_factor(factor):
     return render_template('%s.html' % factor)
 
 
-@app.route('/account-login', methods=['POST', 'GET'])
-def account_login():
-    return render_template('account_login.html')
-
-
 @app.route('/account-register-page', methods=['GET'])
 def account_register_page():
     print('Got in')
-    return render_template('account_register.html', err_info=infos.reg_err_infos[0])
+    return render_template('account_register.html', err_info=infos.reg_err_infos[4])
 
 
 @app.route('/account-register-check', methods=['POST'])
@@ -94,15 +94,15 @@ def account_register_check():
     password2 = request.form.get('password2')
 
     if not all([username, password, password2]):
-        return redirect(url_for('account_register_err_handler', err_type='missing_para'))
+        return redirect(url_for('account_register_err_handler', err_type=infos.reg_err_types[2]))
     elif password != password2:
-        return redirect(url_for('account_register_err_handler', err_type='password_confirm'))
+        return redirect(url_for('account_register_err_handler', err_type=infos.reg_err_types[1]))
     else:
         new_user = Users(username=username, password=password, id=None)
         users = Users.query.filter(Users.username == username).first()
         if users is not None:
             print(users.username)
-            return redirect(url_for('account_register_err_handler', err_type='username'))
+            return redirect(url_for('account_register_err_handler', err_type=infos.reg_err_types[0]))
         else:
             db.session.add(new_user)
             db.session.commit()
@@ -112,14 +112,19 @@ def account_register_check():
 @app.route('/account-register-err/?<string:err_type>')
 def account_register_err_handler(err_type):
     print('err_type = ', err_type)
-    if err_type == 'username':
+    if err_type == infos.reg_err_types[0]:
+        return render_template('account_register.html', err_info=infos.reg_err_infos[0], err_type=err_type)
+    elif err_type == infos.reg_err_types[1]:
         return render_template('account_register.html', err_info=infos.reg_err_infos[1], err_type=err_type)
-    elif err_type == 'password_confirm':
+    elif err_type == infos.reg_err_types[2]:
         return render_template('account_register.html', err_info=infos.reg_err_infos[2], err_type=err_type)
-    elif err_type == 'missing_para':
-        return render_template('account_register.html', err_info=infos.reg_err_infos[3], err_type=err_type)
     else:
-        return render_template('account_register.html', err_info=infos.reg_err_infos[4], err_type='unknown')
+        return render_template('account_register.html', err_info=infos.reg_err_infos[3], err_type=infos.reg_err_types[3])
+
+
+@app.route('/account-login', methods=['POST', 'GET'])
+def account_login():
+    return render_template('account_login.html')
 
 
 @app.route('/login/check', methods=['POST'])
@@ -134,6 +139,9 @@ def login_check():
             return redirect(url_for('home'))
         else:
             return redirect(url_for('account_login'))
+
+
+@app.route('/account-')
 
 
 class Users(db.Model):
