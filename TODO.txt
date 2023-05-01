@@ -1,3 +1,4 @@
 TODO:
     给Account首页顶部添加账户功能介绍
     编写My的后端与前端
+    精简app.py代码
