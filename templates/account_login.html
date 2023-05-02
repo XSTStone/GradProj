@@ -3,21 +3,22 @@
 <head>
 	<title>Account &#8211; Laon Wine House</title>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel='stylesheet' id='woocommerce-layout-css' href='../static/js/vendor/plugins/woocommerce/assets/css/woocommerce-layout.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='woocommerce-smallscreen-css' href='../static/js/vendor/plugins/woocommerce/assets/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)' />
-	<link rel='stylesheet' id='woocommerce-general-css' href='../static/js/vendor/plugins/woocommerce/assets/css/woocommerce.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='trx_addons-icons-css' href='../static/js/vendor/plugins/trx_addons/css/font-icons/css/trx_addons_icons-embedded.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='trx_addons-css' href='../static/js/vendor/plugins/trx_addons/css/trx_addons.css' type='text/css' media='all' />
+
+    <link rel='stylesheet' id='woocommerce-layout-css' href="{{ url_for('static', filename='js/vendor/plugins/woocommerce/assets/css/woocommerce-layout.css') }}" type='text/css' media='all' />
+    <link rel='stylesheet' id='woocommerce-smallscreen-css' href="{{ url_for('static', filename='js/vendor/plugins/woocommerce/assets/css/woocommerce-smallscreen.css') }}" type='text/css' media='only screen and (max-width: 768px)' />
+	<link rel='stylesheet' id='woocommerce-general-css' href="{{ url_for('static', filename='js/vendor/plugins/woocommerce/assets/css/woocommerce.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='trx_addons-icons-css' href="{{ url_for('static', filename='js/vendor/plugins/trx_addons/css/font-icons/css/trx_addons_icons-embedded.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='trx_addons-css' href="{{ url_for('static', filename='js/vendor/plugins/trx_addons/css/trx_addons.css') }}" type='text/css' media='all' />
 	<link rel='stylesheet' id='laon_wine_house-font-google_fonts-css' href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic%7CLato:400,700&amp;subset=latin,latin-ext' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-fontello-css' href='../static/css/fontello/css/fontello-embedded.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-main-css' href='../static/css/style.min.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-animation-css' href='../static/css/animation.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-colors-css' href='../static/css/__colors.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-styles-css' href='../static/css/__styles.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-custom-css' href='../static/css/custom.css' type='text/css' media='all' />
-	<link rel='stylesheet' id='laon_wine_house-responsive-css' href='../static/css/responsive.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-fontello-css' href="{{ url_for('static', filename='css/fontello/css/fontello-embedded.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-main-css' href="{{ url_for('static', filename='css/style.min.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-animation-css' href="{{ url_for('static', filename='css/animation.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-colors-css' href="{{ url_for('static', filename='css/__colors.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-styles-css' href="{{ url_for('static', filename='css/__styles.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-custom-css' href="{{ url_for('static', filename='css/custom.css') }}" type='text/css' media='all' />
+	<link rel='stylesheet' id='laon_wine_house-responsive-css' href="{{ url_for('static', filename='css/responsive.min.css') }}" type='text/css' media='all' />
 </head>
 <body class="page page-id-574 page-template-default woocommerce-account woocommerce-page body_tag body_style_wide scheme_default blog_mode_shop  is_stream blog_style_excerpt sidebar_hide expand_content header_style_header-1 header_position_default header_title_on menu_style_top no_layout vc_responsive">
 	<div class="body_wrap">
@@ -28,7 +29,7 @@
 				<div class="top_panel_navi						scheme_default">
 					<div class="menu_main_wrap clearfix">
 						<div class="wrap">
-							<a class="logo" href="index.html"><img src="../static/images/logo.png" class="logo_main" alt="" /></a>
+							<a class="logo" href="index.html"><img src="{{url_for('static', filename='images/logo.png')}}" class="logo_main" alt="" /></a>
 							<nav class="menu_main_nav_area menu_hover_fade">
 								<ul id="menu_main" class="menu_main_nav">
 									<li class="menu-item menu-item-has-children"><a href="index.html"><span>Home</span></a>
@@ -202,21 +203,53 @@
 							<div class="post_content entry-content">
 								<div class="woocommerce">
 									<h2>Login</h2>
-									<form method="post" class="login" action="/login/check">
-										<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+									<form method="post" class="login" action="/account-login-web">
+                                        {% if err_type == 'username' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 											<label for="username">Username or email address <span class="required">*</span></label>
-											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" value="" />
-										</p>
-										<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-											<label for="password">Password <span class="required">*</span></label>
-											<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
-										</p>
-										<p class="form-row">
-											<input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
-										</p>
-										<p class="woocommerce-LostPassword lost_password">
-											<a href="/account/register">Register a new account</a>
-										</p>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder='Username not exist'/>
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
+                                            </p>
+                                            <p class="woocommerce-LostPassword lost_password">
+                                                <a href="/account/register">Register a new account</a>
+                                            </p>
+                                        {% elif err_type == 'password' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+											<label for="username">Username or email address <span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" />
+										    </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" placeholder='Wrong password' />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
+                                            </p>
+                                            <p class="woocommerce-LostPassword lost_password">
+                                                <a href="/account/register">Register a new account</a>
+                                            </p>
+                                        {% elif err_type == 'normal' %}
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="username">Username or email address <span class="required">*</span></label>
+                                                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" value="" />
+                                            </p>
+                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+                                                <label for="password">Password <span class="required">*</span></label>
+                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
+                                            </p>
+                                            <p class="form-row">
+                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
+                                            </p>
+                                            <p class="woocommerce-LostPassword lost_password">
+                                                <a href="/account/register">Register a new account</a>
+                                            </p>
+                                        {% endif %}
 									</form>
 								</div>
 							</div>
@@ -227,7 +260,7 @@
 			<footer class="site_footer_wrap scheme_dark">
 				<div class="logo_footer_wrap scheme_dark">
 					<div class="logo_footer_wrap_inner">
-						<a href="index.html"><img src="../static/images/logo-footer.png" class="logo_footer_image" alt="" /></a>
+						<a href="index.html"><img src="{{url_for('static', filename='images/logo-footer.png')}}" class="logo_footer_image" alt="" /></a>
 					</div>
 				</div>
 				<div class="socials_footer_wrap socials_wrap scheme_dark">
@@ -261,11 +294,12 @@
 			</footer>
 		</div>
 	</div>
-	<script type='text/javascript' src='../static/js/vendor/jquery.js'></script>
-	<script type='text/javascript' src='../static/js/vendor/jquery-migrate.min.js'></script>
-	<script type='text/javascript' src='../static/js/vendor/plugins/trx_addons/js/trx_addons.js'></script>
-	<script type='text/javascript' src='../static/js/__scripts.js'></script>
-	<script type='text/javascript' src='../static/js/custom/custom.js'></script>
+
+    <script type='text/javascript' src="{{ url_for('static', filename='js/vendor/jquery.js') }}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename='js/vendor/jquery-migrate.min.js') }}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename='js/vendor/plugins/trx_addons/js/trx_addons.js') }}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename='js/__scripts.js') }}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename='js/custom/custom.js') }}"></script>
 	<a href="#" class="trx_addons_scroll_to_top trx_addons_icon-up" title="Scroll to top"></a>
 </body>
 </html>

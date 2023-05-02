@@ -148,9 +148,10 @@ def account_register_err_handler(err_type):
                                err_type=infos.reg_err_types[3])
 
 
-@app.route('/account-login', methods=['POST', 'GET'])
-def account_login():
-    return render_template('account_login.html')
+@app.route("/account-login/<err_type>/", methods=['POST', 'GET'])
+def account_login(err_type):
+    print('err_type = ', err_type)
+    return render_template('account_login.html', err_type=err_type)
 
 
 @app.route('/login/check', methods=['POST'])
@@ -234,29 +235,25 @@ class User_Session(UserMixin):
 @app.route('/account-login-web', methods=('GET', 'POST'))
 def account_login_web():
     print('Got in login web')
-    form = LoginForm()
-    err_msg = None
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        password_cfm = form.password_cfm.data
-        print('username = ', username)
-        print('password = ', password)
-        found_user_in_db = get_user_in_db(username=username)
-        if found_user_in_db is None:
-            err_msg = 'User not exist'
-        elif password != password_cfm:
-            err_msg = 'Different password'
-        else:
-            user = User_Session(found_user_in_db)
-            if user.verify_password(password):
-                login_user(user)
-                return redirect(request.args.get('next') or url_for('index'))
-            else:
-                err_msg = 'Wrong password'
+    err_type = None
+    username = request.form.get('username')
+    password = request.form.get('password')
+    print('username = ', username)
+    print('password = ', password)
+    found_user_in_db = get_user_in_db(username=username)
+
+    if found_user_in_db is None:
+        err_type = 'username'
     else:
-        print('Not in')
-    return render_template('login.html', form=form, err_msg=err_msg)
+        user = User_Session(found_user_in_db)
+        if user.verify_password(password):
+            login_user(user)
+            return redirect(request.args.get('next') or url_for('index'))
+        else:
+            err_type = 'password'
+
+    # return render_template('account_login.html', err_type=err_type)
+    return redirect(url_for('account_login', err_type=err_type))
 
 
 @app.route('/account-login-web-page', methods=('GET', 'POST'))
