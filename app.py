@@ -29,31 +29,9 @@ login_manager.init_app(app)
 login_manager.login_view = 'account_login'
 
 
-@app.route('/home1')
-def home1():
-    return render_template('index.html')
-
-
-@app.route('/home2')
-def home2():
-    return render_template('home2.html')
-
-
 @app.route('/')
-def default_page():
-    return render_template('home2.html')
-
-
-@app.route('/home')
-def home_logged():
-    return render_template('index.html')
-
-
-@app.route('/logged')
-@login_required
 def index():
-    print('GOT In')
-    return render_template('index_web.html', username=current_user.username)
+    return render_template('index.html')
 
 
 # 模型评估
@@ -66,6 +44,22 @@ def judge():
     print(factors)
 
     return render_template('test.html', content=data)
+
+
+@app.route('/score-page', methods=['POST', 'GET'])
+def score_page():
+    return render_template('score_page.html')
+
+
+@app.route('/score-judge', methods=['POST', 'GET'])
+def score_judge():
+    wine_data = request.args.to_dict()
+    wine_factors = []
+    for key in wine_data:
+        wine_factors.append(wine_data[key])
+    print(wine_factors)
+
+    return redirect(url_for('index'))
 
 
 # 葡萄酒相关目录
@@ -131,7 +125,7 @@ def account_register_check():
         else:
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('account_login'))
+            return redirect(url_for('account_login', err_type='normal'))
 
 
 @app.route('/account-register-err/?<string:err_type>')
@@ -154,23 +148,10 @@ def account_login(err_type):
     return render_template('account_login.html', err_type=err_type)
 
 
-@app.route('/login/check', methods=['POST'])
-def account_login_check():
-    print('Got in check')
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-
-        user = Users_db.query.filter(Users_db.username == username, Users_db.password == password).first()
-        if user:
-            return redirect(url_for('home'))
-        else:
-            return redirect(url_for('account_login'))
-
-
 @app.route('/account-my')
+@login_required
 def account_my():
-    return None
+    return render_template('account_my.html', user=current_user)
 
 
 @login_manager.user_loader
@@ -248,23 +229,12 @@ def account_login_web():
         user = User_Session(found_user_in_db)
         if user.verify_password(password):
             login_user(user)
-            return redirect(request.args.get('next') or url_for('index'))
+            return redirect(request.args.get('next') or url_for('account_my'))
         else:
             err_type = 'password'
 
     # return render_template('account_login.html', err_type=err_type)
     return redirect(url_for('account_login', err_type=err_type))
-
-
-@app.route('/account-login-web-page', methods=('GET', 'POST'))
-def account_login_web_page():
-    form = LoginForm()
-    return render_template('login.html', form=form, err_msg='empty')
-
-
-@app.route('/account-register-web-page', methods=('GET', 'POST'))
-def account_register_web_page():
-    return render_template('account_register.html')
 
 
 if __name__ == '__main__':

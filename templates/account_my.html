@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US" class="no-js scheme_default">
 <head>
-	<title>Login &#8211; Wine Home</title>
+	<title>My &#8211; Wine Home</title>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,7 +33,6 @@
 							<nav class="menu_main_nav_area menu_hover_fade">
 								<ul id="menu_main" class="menu_main_nav">
 									<li class="menu-item"><a href="/"><span>Home</span></a></li>
-									<li class="menu-item"><a href="/account-my"><span>My</span></a></li>
 									<li class="menu-item menu-item-has-children"><a href="blog-archive.html"><span>Article</span></a>
 										<ul class="sub-menu">
 											<li class="menu-item"><a href="post-formats.html"><span>category</span></a></li>
@@ -77,72 +76,12 @@
 					<div class="content_wrap">
 						<div class="top_panel_title">
 							<div class="page_title">
-								<h1 class="page_caption">Login</h1>
+								<h1 class="page_caption">My - {{ user.username }} </h1>
 							</div>
 						</div>
 					</div>
 				</div>
 			</header>
-			<div class="page_content_wrap scheme_default">
-				<div class="wrap">
-					<div class="content">
-						<article id="post-574" class="post_item_single post_type_page post-574 page type-page">
-							<div class="post_content entry-content">
-								<div class="woocommerce">
-									<form method="post" class="login" action="/account-login-web">
-                                        {% if err_type == 'username' %}
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-											<label for="username">Username or email address <span class="required">*</span></label>
-											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" placeholder='Username not exist'/>
-										    </p>
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-                                                <label for="password">Password <span class="required">*</span></label>
-                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
-                                            </p>
-                                            <p class="form-row">
-                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
-                                            </p>
-                                            <p class="woocommerce-LostPassword lost_password">
-                                                <a href="/account/register">Register a new account</a>
-                                            </p>
-                                        {% elif err_type == 'password' %}
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-											<label for="username">Username or email address <span class="required">*</span></label>
-											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" />
-										    </p>
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-                                                <label for="password">Password <span class="required">*</span></label>
-                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" placeholder='Wrong password' />
-                                            </p>
-                                            <p class="form-row">
-                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
-                                            </p>
-                                            <p class="woocommerce-LostPassword lost_password">
-                                                <a href="/account/register">Register a new account</a>
-                                            </p>
-                                        {% elif err_type == 'normal' %}
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-                                                <label for="username">Username or email address <span class="required">*</span></label>
-                                                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" value="" />
-                                            </p>
-                                            <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-                                                <label for="password">Password <span class="required">*</span></label>
-                                                <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" />
-                                            </p>
-                                            <p class="form-row">
-                                                <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="f5b9eb57a2" /><input type="hidden" name="_wp_http_referer" value="/account/" /> <input type="submit" class="woocommerce-Button button" name="login" value="Login" />
-                                            </p>
-                                            <p class="woocommerce-LostPassword lost_password">
-                                                <a href="/account-register-page">Register a new account</a>
-                                            </p>
-                                        {% endif %}
-									</form>
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
 			<footer class="site_footer_wrap scheme_dark">
 				<div class="logo_footer_wrap scheme_dark">
 					<div class="logo_footer_wrap_inner">
@@ -161,7 +100,7 @@
 					<div class="menu_footer_wrap_inner">
 						<nav class="menu_footer_nav_area">
 							<ul id="menu_footer" class="menu_footer_nav">
-								<li class="menu-item menu-item-143"><a href="/"><span>Home</span></a></li>
+								<li class="menu-item menu-item-143"><a href="home3.html"><span>Home</span></a></li>
 								<li class="menu-item menu-item-675"><a href="about-us.html"><span>Our philosophy</span></a></li>
 								<li class="menu-item menu-item-677"><a href="wine-list.html"><span>What we craft</span></a></li>
 								<li class="menu-item menu-item-147"><a href="shop.html"><span>Shop</span></a></li>
